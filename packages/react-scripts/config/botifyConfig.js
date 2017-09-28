@@ -51,7 +51,6 @@ const getSCSSLoaderConfig = isDev => {
 };
 
 module.exports = (isDev = true) => ({
-  babelPresets: [require.resolve('babel-preset-stage-0')],
   babelPlugins: [require.resolve('babel-plugin-transform-decorators-legacy')],
   webpackLoaders: [getSCSSLoaderConfig(isDev)],
 });

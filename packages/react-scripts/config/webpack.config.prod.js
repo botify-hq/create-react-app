@@ -179,9 +179,7 @@ module.exports = {
             options: {
               // @remove-on-eject-begin
               babelrc: false,
-              presets: [require.resolve('babel-preset-react-app')].concat(
-                botifyConfig.babelPresets
-              ),
+              presets: [require.resolve('babel-preset-react-app')],
               plugins: botifyConfig.babelPlugins,
               // @remove-on-eject-end
               compact: true,
