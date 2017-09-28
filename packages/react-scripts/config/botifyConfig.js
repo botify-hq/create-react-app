@@ -7,7 +7,10 @@ const getSCSSLoaderConfig = isDev => {
   const loaders = [
     {
       loader: require.resolve('css-loader'),
-      options: Object.assign({}, { minimize: !isDev }, { importLoaders: 1 }),
+      options: {
+        minimize: !isDev,
+        importLoaders: 1,
+      },
     },
     {
       loader: require.resolve('postcss-loader'),
@@ -22,7 +25,7 @@ const getSCSSLoaderConfig = isDev => {
               '>1%',
               'last 4 versions',
               'Firefox ESR',
-              'not ie < 9', // React doesn't support IE8 anyway
+              'not ie < 10', // React doesn't support IE8 anyway
             ],
             flexbox: 'no-2009',
           }),
@@ -48,7 +51,7 @@ const getSCSSLoaderConfig = isDev => {
   };
 };
 
-module.exports = ({ isDev = true } = {}) => ({
+module.exports = {
   babelPlugins: [require.resolve('babel-plugin-transform-decorators-legacy')],
-  webpackLoaders: [getSCSSLoaderConfig(isDev)],
-});
+  webpackLoaders: [getSCSSLoaderConfig(process.env.NODE_ENV !== 'production')],
+};
