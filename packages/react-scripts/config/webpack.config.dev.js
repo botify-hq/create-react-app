@@ -21,8 +21,8 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
-const botifyConfig = require('./botifyConfig');
-
+const getBotifyConfig = require('./botifyConfig');
+const botifyConfig = getBotifyConfig();
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 const publicPath = '/';

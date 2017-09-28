@@ -1,6 +1,7 @@
 'use strict';
 
 const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const postCssOptions = {
   // Necessary for external CSS imports to work
@@ -20,21 +21,37 @@ const postCssOptions = {
   ],
 };
 
-module.exports = {
+const getSCSSLoaderConfig = isDev => {
+  const loaders = [
+    {
+      loader: require.resolve('css-loader'),
+      options: Object.assign({}, { minimize: !isDev }, { importLoaders: 1 }),
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: postCssOptions,
+    },
+    require.resolve('sass-loader'),
+  ];
+
+  if (isDev) {
+    return {
+      test: /\.scss$/,
+      use: [require.resolve('style-loader'), ...loaders],
+    };
+  }
+
+  return {
+    test: /\.scss$/,
+    loader: ExtractTextPlugin.extract({
+      fallback: require.resolve('style-loader'),
+      use: loaders,
+    }),
+  };
+};
+
+module.exports = (isDev = true) => ({
   babelPresets: [require.resolve('babel-preset-stage-0')],
   babelPlugins: [require.resolve('babel-plugin-transform-decorators-legacy')],
-  webpackLoaders: [
-    {
-      test: /\.scss$/,
-      loaders: [
-        require.resolve('style-loader'),
-        require.resolve('css-loader'),
-        {
-          loader: require.resolve('postcss-loader'),
-          options: postCssOptions,
-        },
-        require.resolve('sass-loader'),
-      ],
-    },
-  ],
-};
+  webpackLoaders: [getSCSSLoaderConfig(isDev)],
+});
