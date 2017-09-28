@@ -1,14 +1,14 @@
 {
   "name": "botify-react-scripts",
-  "version": "1.0.13",
-  "description": "Configuration and scripts for Create React App.",
-  "repository": "facebookincubator/create-react-app",
+  "version": "0.0.1",
+  "description": "Configuration and scripts for Botify Applications.",
+  "repository": "botify-hq/create-react-app",
   "license": "BSD-3-Clause",
   "engines": {
-    "node": ">=6"
+    "node": ">=8.2.1"
   },
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/botify-hq/create-react-app/issues"
   },
   "files": [
     "bin",
