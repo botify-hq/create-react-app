@@ -3,24 +3,6 @@
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const postCssOptions = {
-  // Necessary for external CSS imports to work
-  // https://github.com/facebookincubator/create-react-app/issues/2677
-  ident: 'postcss',
-  plugins: () => [
-    require('postcss-flexbugs-fixes'),
-    autoprefixer({
-      browsers: [
-        '>1%',
-        'last 4 versions',
-        'Firefox ESR',
-        'not ie < 9', // React doesn't support IE8 anyway
-      ],
-      flexbox: 'no-2009',
-    }),
-  ],
-};
-
 const getSCSSLoaderConfig = isDev => {
   const loaders = [
     {
@@ -29,7 +11,23 @@ const getSCSSLoaderConfig = isDev => {
     },
     {
       loader: require.resolve('postcss-loader'),
-      options: postCssOptions,
+      options: {
+        // Necessary for external CSS imports to work
+        // https://github.com/facebookincubator/create-react-app/issues/2677
+        ident: 'postcss',
+        plugins: () => [
+          require('postcss-flexbugs-fixes'),
+          autoprefixer({
+            browsers: [
+              '>1%',
+              'last 4 versions',
+              'Firefox ESR',
+              'not ie < 9', // React doesn't support IE8 anyway
+            ],
+            flexbox: 'no-2009',
+          }),
+        ],
+      },
     },
     require.resolve('sass-loader'),
   ];
@@ -50,7 +48,7 @@ const getSCSSLoaderConfig = isDev => {
   };
 };
 
-module.exports = (isDev = true) => ({
+module.exports = ({ isDev = true } = {}) => ({
   babelPlugins: [require.resolve('babel-plugin-transform-decorators-legacy')],
   webpackLoaders: [getSCSSLoaderConfig(isDev)],
 });
