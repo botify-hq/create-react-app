@@ -9,8 +9,10 @@
 'use strict';
 
 const babelJest = require('babel-jest');
+const botifyConfig = require('../botifyConfig');
 
 module.exports = babelJest.createTransformer({
   presets: [require.resolve('babel-preset-react-app')],
+  plugins: botifyConfig.babelPlugins,
   babelrc: false,
 });
