@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+const fs = require('fs');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -54,4 +56,7 @@ const getSCSSLoaderConfig = isDev => {
 module.exports = {
   babelPlugins: [require.resolve('babel-plugin-transform-decorators-legacy')],
   webpackLoaders: [getSCSSLoaderConfig(process.env.NODE_ENV !== 'production')],
+  allowedExternalImports: [
+    path.resolve(fs.realpathSync(process.cwd()), '../../config/config.js'),
+  ],
 };
