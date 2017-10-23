@@ -1,6 +1,6 @@
 {
   "name": "botify-react-scripts",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Configuration and scripts for Botify Applications.",
   "repository": "botify-hq/create-react-app",
   "license": "BSD-3-Clause",
