@@ -8,6 +8,14 @@ const commonJs = path.resolve(
   fs.realpathSync(process.cwd()),
   '../common-js/src'
 );
+const src = path.resolve(
+  fs.realpathSync(process.cwd()),
+  './src'
+);
+const npm = path.resolve(
+  fs.realpathSync(process.cwd()),
+  './node_modules'
+);
 
 const getSCSSLoaderConfig = isDev => {
   const loaders = [
@@ -64,4 +72,5 @@ module.exports = {
   alias: {
     'common-js': commonJs,
   },
+  root: [npm, src],
 };

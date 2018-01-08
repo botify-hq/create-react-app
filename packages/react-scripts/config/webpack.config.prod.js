@@ -117,6 +117,7 @@ module.exports = {
       },
       botifyConfig.alias
     ),
+    root: botifyConfig.root,
   },
   module: {
     strictExportPresence: true,
